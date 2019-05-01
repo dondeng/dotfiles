@@ -27,3 +27,11 @@
   path = ~/.gitconfig.local
 [diff]
   colorMoved = zebra
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = Dennis Ondeng
+	email = dondeng@gmail.com
