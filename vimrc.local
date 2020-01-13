@@ -1,0 +1,171 @@
+" leader
+let mapleader = ";"
+
+" Code completion stuff
+"let g:LanguageClient_autoStop = 0
+"let g:LanguageClient_serverCommands = {
+    "\ 'ruby': ['tcp://localhost:7658']
+    "\ }
+
+"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+"autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+" End Code completion stuff
+
+let g:deoplete#enable_at_startup = 1
+
+" start NERD tree when opening a directory
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
+
+" Auto start NERD tree if no files are specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
+
+
+" Let quit work as expected if after entering :q the only window left open is NERD Tree itself
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+
+
+
+" =====================================
+" key map
+" Understand mapping modes:
+" http://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping#answer-3776182
+" http://stackoverflow.com/questions/22849386/difference-between-nnoremap-and-inoremap#answer-22849425
+" =====================================
+
+
+" Toggle NERDTree
+" Can't get <C-Space> by itself to work, so this works as Ctrl - space - space
+" https://github.com/neovim/neovim/issues/3101
+" http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim#answer-24550772
+"nnoremap <C-Space> :NERDTreeToggle<CR>
+"nmap <C-@> <C-Space>
+nnoremap <silent> <Space> :NERDTreeToggle<CR>
+
+" toggle tagbar
+nnoremap <silent> <leader>tb :TagbarToggle<CR>
+
+" Using CtrlP to search for tags
+nnoremap <leader>. :CtrlPTag<cr>
+
+
+set tags=./tags
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+
+" Dark
+" set background=dark
+" colorscheme vim-material
+
+set background=dark
+"colorscheme material
+colorscheme gruvbox
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" Prevent wrapping of long lines
+set nowrap
+
+" synchronize clipboard register
+set clipboard^=unnamed
+
+" Set specific linters
+"let g:ale_linters = {
+"\   'javascript': ['flow-language-server'],
+"\   'ruby': ['rubocop'],
+"\}
+
+" Only run linters named in ale_linters settings.
+"let g:ale_linters_explicit = 1
+" Enable completion where available.
+" This setting must be set before ALE is loaded.
+"let g:ale_completion_enabled = 1
+"let g:ale_set_highlights = 0
+"let g:ale_text_width = 120
+
+" Show lint errors in status bar
+let g:airline#extensions#ale#enabled = 1 
+
+
+" FZF custom configuration
+nnoremap <silent> <C-t> :FZF -m<cr>
+
+" <M-p> for open buffers
+" nnoremap <silent> <M-p> :Buffers<cr>
+
+" <M-S-p> for MRU
+nnoremap <silent> <M-S-p> :History<cr>
+
+nnoremap <silent> <F12> :Buffers<cr>
+
+" Silver seracher config
+let g:ackprg = 'ag --vimgrep'
+
+
+" mappings fro vim-rspec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_runner = "os_x_iterm2"
+"let g:rspec_command = !rspec --format doc {spec}
+let g:rspec_command = "!bin/spring rspec --format doc {spec}"
+
+" Solograph language server stuff.
+" Required for operations modifying multiple buffers like rename.
+"set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['flow', 'lsp'],
+    \ 'javascript.jsx': ['flow', 'lsp'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+
+" Syntastic settings
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+"let g:syntastic_ruby_checkers = ['rubocop']
+"let g:syntastic_quiet_messages = { "type": "style" }
+
+
+" Coc Nvim Config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-solargraph',
+  \ 'coc-html',
+  \ ]
+
+
+
+" Verbose plugin configurations
+" coc.nvim
+if filereadable($HOME . "/.vimrc.local.cocnvim")
+  source ~/.vimrc.local.cocnvim
+endif

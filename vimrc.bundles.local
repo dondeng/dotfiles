@@ -1,0 +1,87 @@
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdtree'
+Plug 'ludovicchabant/vim-gutentags'
+
+" Git tools
+Plug 'tpope/vim-fugitive'
+
+" Commenting and uncommenting stuff
+Plug 'tomtom/tcomment_vim'
+
+" Tagbar
+" https://github.com/majutsushi/tagbar
+Plug 'majutsushi/tagbar'
+
+" NerdTree git plugin
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Status line plugin
+" Plug 'itchyny/lightline.vim'
+
+" Use vim-airline for status line instead
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" Material theme
+" Plug 'hzchirs/vim-material'
+
+"Plug 'kaicataldo/material.vim'
+
+" gruvbox theme
+Plug 'morhetz/gruvbox'
+
+" Plugin to show git diff in the gutter column
+Plug 'airblade/vim-gitgutter'
+
+" BufferExplorer plugin
+" https://github.com/jlanzarotta/bufexplorer
+Plug 'jlanzarotta/bufexplorer'
+
+
+" A solid language pack for VIM
+" https://github.com/sheerun/vim-polyglot
+Plug 'sheerun/vim-polyglot'
+
+" Plugin for commenting out code / lines
+Plug 'scrooloose/nerdcommenter'
+
+" fzf
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
+" ack.vim
+" Use your favourite search tool with vim
+Plug 'mileszs/ack.vim'
+
+" Javascript plugin
+Plug 'pangloss/vim-javascript'
+
+" Respec plugin
+Plug 'thoughtbot/vim-rspec'
+
+" Ale linter
+"Plug 'w0rp/ale'
+" Ale linter
+Plug 'dense-analysis/ale'
+
+"Plug 'autozimu/LanguageClient-neovim', {
+    "\ 'branch': 'next',
+    "\ 'do': 'bash install.sh',
+    "\ }
+
+
+"Syntastic Plugin
+"Plug 'vim-syntastic/syntastic'
+
+" Coc plugin
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
