@@ -86,3 +86,9 @@ Plug 'dense-analysis/ale'
 " Coc plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" TODo manager plugin
+Plug 'wsdjeg/vim-todo'
+
+" Flygrep plugin from Spacevim
+Plug 'wsdjeg/FlyGrep.vim'
+
